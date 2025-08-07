@@ -1,0 +1,622 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNvVOSp6MJF6iQ0p20WwyBZ",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Chanakya2006gt/Batch-17/blob/main/Lab%204\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "fb5af0fd"
+      },
+      "source": [
+        "# Task\n",
+        "Act as a professional programmer and provide Python code that implements both the bubble sort algorithm and uses Python's built-in `sort()` function to sort a list of numbers. Include code to compare the execution time of both methods and explain the difference in performance, tailored for a beginner."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "b9fba7eb"
+      },
+      "source": [
+        "## Implement bubble sort\n",
+        "\n",
+        "### Subtask:\n",
+        "Write a Python function that implements the bubble sort algorithm. Include comments to explain each step for beginners.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "c7c107e3"
+      },
+      "source": [
+        "**Reasoning**:\n",
+        "Implement the bubble sort function as described in the instructions, including comments for beginners.\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "295219f3"
+      },
+      "source": [
+        "def bubble_sort(numbers):\n",
+        "    \"\"\"Sorts a list of numbers using the bubble sort algorithm.\n",
+        "\n",
+        "    Args:\n",
+        "        numbers: A list of numbers to be sorted in place.\n",
+        "    \"\"\"\n",
+        "    n = len(numbers)\n",
+        "    # Outer loop to iterate through all elements\n",
+        "    # We need n-1 passes to sort the list\n",
+        "    for i in range(n):\n",
+        "        # Inner loop for comparisons and swaps\n",
+        "        # The last i elements are already in place\n",
+        "        for j in range(0, n - i - 1):\n",
+        "            # Compare adjacent elements\n",
+        "            # If the element on the left is greater than the element on the right\n",
+        "            if numbers[j] > numbers[j + 1]:\n",
+        "                # Swap their positions\n",
+        "                numbers[j], numbers[j + 1] = numbers[j + 1], numbers[j]\n"
+      ],
+      "execution_count": 1,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "2f5eaac8"
+      },
+      "source": [
+        "## Generate test data\n",
+        "\n",
+        "### Subtask:\n",
+        "Create a list of random numbers to use as input for both sorting methods.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "f7feb575"
+      },
+      "source": [
+        "**Reasoning**:\n",
+        "Generate a list of 1000 random integers and store it in a variable.\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "5d1903bc"
+      },
+      "source": [
+        "import random\n",
+        "\n",
+        "random_numbers = [random.randint(1, 10000) for _ in range(1000)]"
+      ],
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "0c7ac2b1"
+      },
+      "source": [
+        "## Implement comparison logic\n",
+        "\n",
+        "### Subtask:\n",
+        "Write code to measure the execution time of both the bubble sort function and Python's built-in `sort()` function when sorting the test data.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "2fff2f2c"
+      },
+      "source": [
+        "**Reasoning**:\n",
+        "Measure the execution time of both sorting methods.\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "8997370e",
+        "outputId": "ae5caf79-0eb8-4465-db28-8a0be98df8cc"
+      },
+      "source": [
+        "import time\n",
+        "\n",
+        "# Create a copy for bubble sort\n",
+        "random_numbers_bubble = random_numbers.copy()\n",
+        "\n",
+        "# Measure time for bubble sort\n",
+        "start_time_bubble = time.time()\n",
+        "bubble_sort(random_numbers_bubble)\n",
+        "end_time_bubble = time.time()\n",
+        "bubble_sort_time = end_time_bubble - start_time_bubble\n",
+        "\n",
+        "# Measure time for built-in sort\n",
+        "start_time_builtin = time.time()\n",
+        "random_numbers.sort()\n",
+        "end_time_builtin = time.time()\n",
+        "builtin_sort_time = end_time_builtin - start_time_builtin\n",
+        "\n",
+        "print(f\"Bubble Sort Execution Time: {bubble_sort_time} seconds\")\n",
+        "print(f\"Built-in Sort Execution Time: {builtin_sort_time} seconds\")"
+      ],
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Bubble Sort Execution Time: 0.08886051177978516 seconds\n",
+            "Built-in Sort Execution Time: 0.00026988983154296875 seconds\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ff19ceb1"
+      },
+      "source": [
+        "## Present results\n",
+        "\n",
+        "### Subtask:\n",
+        "Display the execution times of both sorting methods and provide a clear explanation of why Python's built-in sort is generally much faster than bubble sort.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "637b1de0"
+      },
+      "source": [
+        "**Reasoning**:\n",
+        "Display the execution times and provide an explanation for the performance difference.\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "715dc15e",
+        "outputId": "66b70ff2-1a59-4644-88ba-628fbab81e61"
+      },
+      "source": [
+        "print(f\"Bubble Sort Execution Time: {bubble_sort_time} seconds\")\n",
+        "print(f\"Built-in Sort Execution Time: {builtin_sort_time} seconds\")\n",
+        "\n",
+        "print(\"\\nWhy Python's built-in sort is faster:\")\n",
+        "print(\"Imagine you have a messy stack of papers to sort by date.\")\n",
+        "print(\"Bubble sort is like going through the stack, comparing two adjacent papers at a time, and swapping them if they are in the wrong order. You do this over and over until the whole stack is sorted.\")\n",
+        "print(\"This works, but it's very slow, especially with a large stack, because you might have to do many, many comparisons and swaps.\")\n",
+        "print(\"\\nPython's built-in sort is much smarter. Instead of just comparing adjacent items, it uses a more advanced method (often a variation of an algorithm called Timsort).\")\n",
+        "print(\"Think of it like sorting the papers by splitting the stack into smaller piles, sorting those smaller piles more efficiently, and then merging the sorted piles back together.\")\n",
+        "print(\"This approach dramatically reduces the number of comparisons and movements needed, making it much faster for larger lists.\")\n",
+        "print(\"For beginners, the key takeaway is that while bubble sort is easy to understand, more complex algorithms used in built-in functions are designed to handle large amounts of data much more efficiently.\")"
+      ],
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Bubble Sort Execution Time: 0.08886051177978516 seconds\n",
+            "Built-in Sort Execution Time: 0.00026988983154296875 seconds\n",
+            "\n",
+            "Why Python's built-in sort is faster:\n",
+            "Imagine you have a messy stack of papers to sort by date.\n",
+            "Bubble sort is like going through the stack, comparing two adjacent papers at a time, and swapping them if they are in the wrong order. You do this over and over until the whole stack is sorted.\n",
+            "This works, but it's very slow, especially with a large stack, because you might have to do many, many comparisons and swaps.\n",
+            "\n",
+            "Python's built-in sort is much smarter. Instead of just comparing adjacent items, it uses a more advanced method (often a variation of an algorithm called Timsort).\n",
+            "Think of it like sorting the papers by splitting the stack into smaller piles, sorting those smaller piles more efficiently, and then merging the sorted piles back together.\n",
+            "This approach dramatically reduces the number of comparisons and movements needed, making it much faster for larger lists.\n",
+            "For beginners, the key takeaway is that while bubble sort is easy to understand, more complex algorithms used in built-in functions are designed to handle large amounts of data much more efficiently.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "572aba9c"
+      },
+      "source": [
+        "## Summary:\n",
+        "\n",
+        "### Data Analysis Key Findings\n",
+        "\n",
+        "*   A bubble sort implementation was successfully created that sorts a list of numbers in place using nested loops and adjacent comparisons and swaps.\n",
+        "*   A list of 1000 random integers was generated as test data.\n",
+        "*   The execution time of the bubble sort algorithm was measured and found to be approximately 0.089 seconds for sorting the list of 1000 random numbers.\n",
+        "*   The execution time of Python's built-in `sort()` function was measured and found to be approximately 0.00027 seconds for sorting the same list, demonstrating it is significantly faster than the bubble sort.\n",
+        "*   An explanation was provided using a paper sorting analogy to illustrate why the built-in sort (using a more advanced algorithm like Timsort) is much faster than bubble sort for larger lists by requiring fewer comparisons and movements.\n",
+        "\n",
+        "### Insights or Next Steps\n",
+        "\n",
+        "*   Bubble sort is a simple algorithm for beginners to understand but is inefficient for larger datasets due to its high number of comparisons and swaps.\n",
+        "*   Python's built-in `sort()` function utilizes a highly optimized algorithm (Timsort) making it the preferred and significantly faster method for sorting in practical applications.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "2483d099"
+      },
+      "source": [
+        "## Counting Vowels, Consonants, and Digits\n",
+        "\n",
+        "Let's write some code to count how many vowels, consonants, and numbers (digits) are in a piece of text!"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "5db9d824"
+      },
+      "source": [
+        "# First, we need a string to work with! Let's make one up.\n",
+        "my_string = \"Hello World 123!\"\n",
+        "\n",
+        "# Now, we need to keep track of the counts. We'll start them all at zero.\n",
+        "vowel_count = 0\n",
+        "consonant_count = 0\n",
+        "digit_count = 0\n",
+        "\n",
+        "# Vowels are the letters A, E, I, O, U (and their lowercase versions).\n",
+        "vowels = \"aeiouAEIOU\"\n",
+        "\n",
+        "# We need to go through each character in our string one by one.\n",
+        "for char in my_string:\n",
+        "    # We can check if the character is a letter first.\n",
+        "    if char.isalpha():\n",
+        "        # If it's a letter, we check if it's a vowel.\n",
+        "        if char in vowels:\n",
+        "            vowel_count = vowel_count + 1 # Add 1 to the vowel count\n",
+        "        else:\n",
+        "            consonant_count = consonant_count + 1 # If it's not a vowel but is a letter, it's a consonant!\n",
+        "    # If it's not a letter, we check if it's a digit (a number from 0 to 9).\n",
+        "    elif char.isdigit():\n",
+        "        digit_count = digit_count + 1 # Add 1 to the digit count\n",
+        "\n",
+        "# Finally, let's print out our counts so we can see the results!\n",
+        "print(\"The string is:\", my_string)\n",
+        "print(\"Number of vowels:\", vowel_count)\n",
+        "print(\"Number of consonants:\", consonant_count)\n",
+        "print(\"Number of digits:\", digit_count)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "a282686a"
+      },
+      "source": [
+        "# Task\n",
+        "Write a Python program as a beginner Python developer that performs file handling: creates a text file, writes sample text to it, and then displays the content of the file."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "4897b783"
+      },
+      "source": [
+        "## Create a text file\n",
+        "\n",
+        "### Subtask:\n",
+        "Write Python code to create a new text file.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "1ed6d977"
+      },
+      "source": [
+        "**Reasoning**:\n",
+        "Create a new text file using the open function in write mode and close it.\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "c0275f76",
+        "outputId": "4abe9ec0-a133-4000-d62a-c0b933ccc5d9"
+      },
+      "source": [
+        "# Choose a file name\n",
+        "file_name = \"my_sample_file.txt\"\n",
+        "\n",
+        "# Open the file in write mode ('w')\n",
+        "file_object = open(file_name, 'w')\n",
+        "\n",
+        "# Close the file\n",
+        "file_object.close()\n",
+        "\n",
+        "print(f\"File '{file_name}' created successfully.\")"
+      ],
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "File 'my_sample_file.txt' created successfully.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "413b45de"
+      },
+      "source": [
+        "## Write to the file\n",
+        "\n",
+        "### Subtask:\n",
+        "Write some sample text into the newly created file.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "149ef232"
+      },
+      "source": [
+        "**Reasoning**:\n",
+        "Write the sample text into the file and close it.\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "bddb0950",
+        "outputId": "35004354-4806-4f04-dc48-498d66eadb36"
+      },
+      "source": [
+        "# Open the file in write mode ('w')\n",
+        "file_object = open(\"my_sample_file.txt\", 'w')\n",
+        "\n",
+        "# Write the sample text to the file\n",
+        "file_object.write(\"This is some sample text.\")\n",
+        "\n",
+        "# Close the file\n",
+        "file_object.close()\n",
+        "\n",
+        "print(\"Sample text written to the file.\")"
+      ],
+      "execution_count": 10,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Sample text written to the file.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "7d903083"
+      },
+      "source": [
+        "## Read from the file\n",
+        "\n",
+        "### Subtask:\n",
+        "Write Python code to read the content from the file.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "3788d4f7"
+      },
+      "source": [
+        "**Reasoning**:\n",
+        "Read the content from the file as instructed.\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "9aebd71a",
+        "outputId": "584d3e7b-45f1-436d-e8ab-3d7762136d78"
+      },
+      "source": [
+        "# Open the file in read mode ('r')\n",
+        "file_object = open(\"my_sample_file.txt\", 'r')\n",
+        "\n",
+        "# Read the entire content of the file\n",
+        "file_content = file_object.read()\n",
+        "\n",
+        "# Close the file\n",
+        "file_object.close()\n",
+        "\n",
+        "# Print the content to verify\n",
+        "print(\"Content read from the file:\")\n",
+        "print(file_content)"
+      ],
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Content read from the file:\n",
+            "This is some sample text.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "103e9bc0"
+      },
+      "source": [
+        "## Display the content\n",
+        "\n",
+        "### Subtask:\n",
+        "Display the content that was read from the file.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "a325cb99"
+      },
+      "source": [
+        "**Reasoning**:\n",
+        "Display the content read from the file with a descriptive message.\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "e00fe9f8",
+        "outputId": "e245f8dc-e03b-4a3d-91ed-d8d526000a1d"
+      },
+      "source": [
+        "# Print the content that was read from the file\n",
+        "print(\"The content read from the file is:\")\n",
+        "print(file_content)"
+      ],
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "The content read from the file is:\n",
+            "This is some sample text.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "acabd3aa"
+      },
+      "source": [
+        "## Summary:\n",
+        "\n",
+        "### Data Analysis Key Findings\n",
+        "\n",
+        "*   A file named \"my\\_sample\\_file.txt\" was successfully created.\n",
+        "*   The sample text \"This is some sample text.\" was successfully written to the file.\n",
+        "*   The content \"This is some sample text.\" was successfully read back from the file.\n",
+        "*   The read content from the file was successfully displayed.\n",
+        "\n",
+        "### Insights or Next Steps\n",
+        "\n",
+        "*   Consider using the `with` statement for file handling as it automatically handles closing the file, reducing the risk of resource leaks.\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "7249bbbf"
+      },
+      "source": [
+        "# Checking for a Leap Year\n",
+        "\n",
+        "Let's write a program to figure out if a year is a leap year!"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "c7ba03b0"
+      },
+      "source": [
+        "# First, we need to get the year from the user.\n",
+        "# The input() function gets text from the user, and we use int() to turn it into a whole number.\n",
+        "year = int(input(\"Enter a year: \"))\n",
+        "\n",
+        "# Now, we need to check if it's a leap year using some rules:\n",
+        "# A year is a leap year if it is divisible by 4, EXCEPT for years divisible by 100 but NOT by 400.\n",
+        "\n",
+        "# Check if the year is divisible by 4\n",
+        "if (year % 4) == 0:\n",
+        "    # If it's divisible by 4, we need to check the exceptions:\n",
+        "    # If it's also divisible by 100\n",
+        "    if (year % 100) == 0:\n",
+        "        # If it's divisible by 100, it's NOT a leap year UNLESS it's also divisible by 400.\n",
+        "        if (year % 400) == 0:\n",
+        "            print(f\"{year} is a leap year.\")\n",
+        "        else:\n",
+        "            print(f\"{year} is not a leap year.\")\n",
+        "    else:\n",
+        "        # If it's divisible by 4 but not by 100, it IS a leap year.\n",
+        "        print(f\"{year} is a leap year.\")\n",
+        "else:\n",
+        "    # If it's not divisible by 4, it's definitely NOT a leap year.\n",
+        "    print(f\"{year} is not a leap year.\")"
+      ],
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
